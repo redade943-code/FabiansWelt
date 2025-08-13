@@ -159,14 +159,23 @@ export default function App() {
             <ComposableMap projectionConfig={{ scale: 160 }} className="w-full h-auto">
               <Geographies geography={TOPO_JSON}>
                 {({ geographies }) => geographies.map(geo => {
-                  const code = geo.properties.ISO_A2 || geo.properties.ISO_A2_EH || "";
-                  const name = geo.properties.NAME || geo.properties.NAME_LONG || "Unbenannt";
+                  const code =
+  geo.properties.ISO_A2_EH || // meist vorhanden
+  geo.properties.ISO_A2 ||    // fallback
+  "";
+
+const name =
+  geo.properties.NAME ||       // meist vorhanden
+  geo.properties.ADMIN ||      // fallback
+  geo.properties.NAME_LONG ||
+  "Unbenannt";
+
                   const isActive = activeCountry?.code === code;
                   return (
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
-                      onClick={() => code && setActiveCountry({ code, name })}
+                      onClick={() => setActiveCountry({ code, name })}
                       style={{
                         default: { fill: isActive ? "#93c5fd" : "#e5e7eb", outline: "none" },
                         hover: { fill: "#bfdbfe", outline: "none" },
