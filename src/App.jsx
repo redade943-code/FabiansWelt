@@ -38,7 +38,7 @@ const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "";
 const supabase = (SUPABASE_URL && SUPABASE_ANON_KEY) ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 // Weltkarte TopoJSON (leichtgewichtiges CDN)
-const TOPO_JSON = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const TOPO_JSON = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 // 🏳️‍🌈 Flaggen-Emoji aus ISO-A2
 function flagEmojiFromISO2(code) {
